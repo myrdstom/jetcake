@@ -2,5 +2,6 @@
 @import 'base/base';
 @import 'components/header';
 @import 'components/footer';
-@import 'components/auth/login';
+@import 'components/auth/auth';
 @import "components/profile/profile";
+@import "components/loader";

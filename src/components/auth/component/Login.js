@@ -1,12 +1,4 @@
 import React from 'react';
-import woman from '../../../assets/images/auth/women.jpg';
-import styled from 'styled-components';
-
-const SectionStyle = styled.div`
-    background-image: url(${woman});
-    background-size: cover;
-    height: 94.5vh;
-`;
 
 export default function Login(props) {
     return (
@@ -30,11 +22,6 @@ export default function Login(props) {
                                     id="email"
                                     required
                                 />
-                                {props.errors.email && (
-                                    <div className="error-message">
-                                        {props.errors.email}
-                                    </div>
-                                )}
                             </div>
                             <div className="form-group">
                                 <label htmlFor="password">Password</label>
@@ -47,13 +34,6 @@ export default function Login(props) {
                                     onChange={props.onChange}
                                     required
                                 />
-                                {!props.errors.email
-                                    ? props.errors.password && (
-                                    <div className="error-message">
-                                        {props.errors.password}
-                                    </div>
-                                )
-                                    : ''}
                             </div>
                             <input
                                 type="submit"
@@ -61,9 +41,6 @@ export default function Login(props) {
                             />
                         </form>
                     </div>
-                </div>
-                <div className="image__container">
-                    <SectionStyle />
                 </div>
             </div>
         </div>

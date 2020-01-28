@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import avatar from '../../../assets/images/avatar.png';
 
 function ViewProfile(props) {
     const { email, firstName, lastName, address, phone, avatar, dateOfBirth } = props.profile;

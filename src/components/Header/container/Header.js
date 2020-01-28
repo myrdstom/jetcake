@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import ViewHeader from "../component/ViewHeader";
 
 export class Header extends Component {
@@ -24,9 +23,5 @@ export class Header extends Component {
 Header.propTypes = {
 
 };
-
-const mapStateToProps = state => ({
-
-});
 
 export default Header;
