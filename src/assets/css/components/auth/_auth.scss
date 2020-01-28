@@ -1,0 +1,68 @@
+
+
+.auth__action{
+  letter-spacing: -0.01em;
+  font-size: $very-large-font-size;
+  line-height: 1.31818182em;
+  padding: 20px 0;
+}
+.authentication__container{
+  color:$blue;
+  padding: 10% 20% 10% 20%;
+
+}
+
+.auth__grid{
+  display: grid;
+}
+.item{
+
+}
+
+
+.registration__container{
+  color:$blue;
+  padding: 20%;
+}
+
+
+.authentication__aside{
+  height: 94vh;
+}
+
+.registration__aside{
+  height: 115%;
+}
+
+
+
+.image__container {
+  height: 94.5vh;
+  width: auto;
+}
+
+
+.sign__in{
+  color: white;
+}
+
+.sign__in:hover{
+  color: white;
+}
+
+.mt-4{
+  background-color: $blue;
+  border-color: $blue;
+}
+
+@media only screen and (max-width: 600px) {
+  .auth__grid{
+    display: grid;
+    grid-template-columns: 100%;
+  }
+  .image__container{
+    display: none;
+  }
+}
+
+
