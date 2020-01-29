@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function Login(props) {
+    const {email, password, onChange, onSubmit} = props;
     return (
         <div>
             <div className="auth__grid">
@@ -9,7 +10,7 @@ export default function Login(props) {
                         <h1>Welcome back</h1>
                         <div className="auth__action">Sign In</div>
                         <br />
-                        <form noValidate onSubmit={props.onSubmit}>
+                        <form noValidate onSubmit={onSubmit}>
                             <div className="form-group">
                                 <label htmlFor="email">Email address</label>
                                 <input
@@ -17,8 +18,8 @@ export default function Login(props) {
                                     className="form-control form-control-sm"
                                     name="email"
                                     placeholder="Enter email"
-                                    value={props.email}
-                                    onChange={props.onChange}
+                                    value={email}
+                                    onChange={onChange}
                                     id="email"
                                     required
                                 />
@@ -30,8 +31,8 @@ export default function Login(props) {
                                     className="form-control form-control-sm"
                                     name="password"
                                     placeholder="Password"
-                                    value={props.password}
-                                    onChange={props.onChange}
+                                    value={password}
+                                    onChange={onChange}
                                     required
                                 />
                             </div>

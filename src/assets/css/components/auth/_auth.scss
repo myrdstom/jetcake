@@ -22,7 +22,7 @@
 
 .registration__container{
   color:$blue;
-  padding: 20%;
+  padding: 0% 20% 0 20%;
 }
 
 
@@ -53,6 +53,10 @@
 .mt-4{
   background-color: $blue;
   border-color: $blue;
+}
+
+.inline__name{
+  display: inline;
 }
 
 @media only screen and (max-width: 600px) {
