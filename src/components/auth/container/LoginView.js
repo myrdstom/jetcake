@@ -1,26 +1,49 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Loader from '../../Loader';
-import { compose } from 'redux';
-import {firebaseConnect, firestoreConnect} from 'react-redux-firebase';
-import Login from "../component/Login";
-
+import { firebaseConnect } from 'react-redux-firebase';
+import Login from '../component/Login';
 
 class LoginView extends Component {
+    constructor() {
+        super();
+        this.state = {
+            email: '',
+            password: ''
+        };
+    }
+
+    handleChange = e => {
+        this.setState({ [e.target.name]: e.target.value });
+    };
+    handleSubmit = e => {
+        e.preventDefault();
+        const { firebase } = this.props;
+
+        const { email, password } = this.state;
+        firebase
+            .login({
+                email,
+                password,
+            })
+            .catch(err => alert('Invalid Login Credentials'));
+    };
     render() {
+        const { email, password } = this.state;
         return (
-            <div className="Login_Page">
-                <Login/>
+            <div>
+                <Login
+                    email={email}
+                    password={password}
+                    onChange={this.handleChange}
+                    onSubmit={this.handleSubmit}
+                />
             </div>
         );
     }
 }
 
 LoginView.propTypes = {
-    firebase: PropTypes.object.isRequired
+    firebase: PropTypes.object.isRequired,
 };
 
-export default firebaseConnect(
-
-)(LoginView);
+export default firebaseConnect()(LoginView);

@@ -3,19 +3,17 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Loader from '../../Loader';
 import { compose } from 'redux';
-import { firestoreConnect } from 'react-redux-firebase';
+import {firebaseConnect, firestoreConnect} from 'react-redux-firebase';
 import EditProfile from '../component/EditProfile';
 
 class EditProfileView extends Component {
-    constructor() {
-        super();
-        this.state = {
-            avatar: '',
-            firstName: '',
-            lastName: '',
-            bio: '',
-            errors: {},
-        };
+    state = {
+        firstName:'',
+        lastName:'',
+        avatar:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTSVWuCurkB8xwYNcygqZlUPJdUvmfCoOiyQZk1L74c6cX-6Boq',
+        phone:'',
+        address:'',
+        dateOfBirth: ''
     }
     // componentDidMount() {
     //     if (!this.props.auth.isAuthenticated) {
@@ -28,37 +26,38 @@ class EditProfileView extends Component {
     //     }
     // }
 
-    // componentWillReceiveProps(nextProps) {
-    //     if (nextProps.errors) {
-    //         this.setState({ errors: nextProps.errors }, () => {
-    //             console.log(this.state.errors);
-    //         });
-    //     }
-    //
-    //     if (nextProps.profile.profile && nextProps.profile.loading === false) {
-    //         const {
-    //             firstName,
-    //             lastName,
-    //             bio,
-    //             avatar,
-    //         } = nextProps.profile.profile;
-    //         this.setState({
-    //             avatar,
-    //             firstName,
-    //             lastName,
-    //             bio,
-    //         });
-    //     }
-    // }
+    componentWillReceiveProps(nextProps) {
+        const auth =nextProps.auth;
+        const profile = nextProps.profiles;
+        if(auth&& profile){
+
+            for(let i=0; i <profile.length; i++) {
+                if(auth.email === profile[i].email){
+                    console.log(auth.email);
+                    console.log(profile[i].email,'the email from profile');
+                    this.setState({
+                        firstName: profile[i].firstName || '',
+                        lastName:profile[i].lastName || '',
+                        phone:profile[i].phone || '',
+                        address:profile[i].address || '',
+                        dateOfBirth: profile[i].dateOfBirth || ''
+                    })
+                }
+            }
+
+        }
+    }
 
     handleChange = e => {
         this.setState({ [e.target.name]: e.target.value });
     };
 
     mouseClick = () => {
+        const { history } = this.props;
         window.cloudinary.openUploadWidget(
             {
                 cloudName: 'dr8lvoqjj',
+                api_key: '456553935284737',
                 uploadPreset: 'gt2kahpt',
                 cropping: true,
                 folder: 'widgetdocs',
@@ -77,7 +76,7 @@ class EditProfileView extends Component {
                     let newImage = result.info.secure_url;
                     window.localStorage.setItem('newImage', newImage);
                     window.localStorage.setItem('image', newImage);
-                    window.location.reload();
+                    history.push('/create-profile');
                 }
             },
         );
@@ -101,24 +100,17 @@ class EditProfileView extends Component {
     render() {
         const { profiles } = this.props;
         if (profiles) {
-            const profile = {
-                id: profiles[0].id,
-                firstName: profiles[0]['firstName'],
-                lastName: profiles[0]['lastName'],
-                email: profiles[0]['email'],
-                avatar:
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTSVWuCurkB8xwYNcygqZlUPJdUvmfCoOiyQZk1L74c6cX-6Boq',
-                phone: profiles[0]['Phone Number'],
-                address: profiles[0]['Address'],
-                dateOfBirth: '13-04-2020',
-            };
+            const {firstName, lastName,  avatar, phone, address, dateOfBirth} = this.state;
 
             return (
                 <div>
                     <EditProfile
-                        avatar={profile.avatar}
-                        firstName={profile.firstName}
-                        lastName={profile.lastName}
+                        avatar={avatar}
+                        firstName={firstName}
+                        lastName={lastName}
+                        phone={phone}
+                        address={address}
+                        dateOfBirth={dateOfBirth}
                         onMouseClick={this.mouseClick}
                         onChange={this.handleChange}
                         onSubmit={this.handleSubmit}
@@ -145,4 +137,8 @@ export default compose(
     connect((state, props) => ({
         profiles: state.firestore.ordered.profiles,
     })),
+    firebaseConnect(),
+    connect((state, props) => ({
+        auth: state.firebase.auth,
+    }))
 )(EditProfileView);

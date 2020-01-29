@@ -3,9 +3,11 @@ import avatar from '../../../assets/images/avatar.png';
 
 function EditProfile(props) {
     const {
-        bio,
+        phone,
         firstName,
         lastName,
+        dateOfBirth,
+        address,
         onSubmit,
         onChange,
         onMouseClick,
@@ -24,8 +26,8 @@ function EditProfile(props) {
                             Let's make your profile awesome!!
                         </p>
                     </h2>
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
                 </div>
                 <div className="row">
                     <div className="col-md-3 float-left">
@@ -35,7 +37,7 @@ function EditProfile(props) {
                                     <img
                                         className="profile__avatar"
                                         src={window.localStorage.getItem(
-                                            'image'
+                                            'image',
                                         )}
                                         onClick={onMouseClick}
                                         alt=""
@@ -90,14 +92,39 @@ function EditProfile(props) {
                                     required
                                 />
                                 <br />
-                                <label htmlFor="bio">Bio</label>
-                                <textarea
+                                <label htmlFor="phone">Phone</label>
+                                <input
                                     type="text"
                                     className="form-control profile__input"
-                                    name="bio"
-                                    value={bio}
-                                    onChange={props.onChange}
-                                    id="bio"
+                                    name="phone"
+                                    value={phone}
+                                    onChange={onChange}
+                                    id="lastName"
+                                    required
+                                />
+                                <br />
+                                <label htmlFor="address">Address</label>
+                                <input
+                                    type="text"
+                                    className="form-control profile__input"
+                                    name="address"
+                                    value={address}
+                                    onChange={onChange}
+                                    id="lastName"
+                                    required
+                                />
+                                <br />
+                                <label htmlFor="dateOfBirth">
+                                    Date of Birth
+                                </label>
+                                <input
+                                    type="text"
+                                    className="form-control profile__input"
+                                    name="dateOfBirth"
+                                    value={dateOfBirth}
+                                    onChange={onChange}
+                                    id="lastName"
+                                    required
                                 />
                             </div>
                             <input
