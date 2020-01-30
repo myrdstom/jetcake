@@ -1,19 +1,38 @@
 import React, { Component } from 'react';
-import ViewHeader from "../component/ViewHeader";
+import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { firebaseConnect } from 'react-redux-firebase';
+
+import ViewHeader from '../component/ViewHeader';
 
 export class Header extends Component {
+    state = {
+        isAuthenticated: false,
+    };
+
     componentDidMount() {
+        const {auth} = this.props;
+        console.log(auth, 'the auth');
     }
 
-    onLogoutClick = e => {
 
-    };
+    componentWillReceiveProps(nextProps) {
+        const {auth} = this.props;
+        if(auth){
+            this.setState({isAuthenticated: true})
+
+        }
+    }
+
+    onLogoutClick = e => {};
     render() {
+        const {isAuthenticated} = this.state;
         return (
             <div>
                 <ViewHeader
-                    isAuthenticated={false}
-                    onLogoutClick = {this.onLogoutClick}
+                    isAuthenticated={isAuthenticated}
+                    onLogoutClick={this.onLogoutClick}
                 />
             </div>
         );
@@ -21,7 +40,12 @@ export class Header extends Component {
 }
 
 Header.propTypes = {
-
+    firebase: PropTypes.object.isRequired,
 };
 
-export default Header;
+export default compose(
+    firebaseConnect(),
+    connect((state, props) => ({
+        auth: state.firebase.auth,
+    })),
+)(Header);

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const ViewHeader = props => {
     const { isAuthenticated, onLogoutClick } = props;
+    console.log(isAuthenticated,'isAuthenticated');
 
     return (
         <nav className="shadow navbar navbar-expand-lg navbar-light bg-light mb-4">
@@ -47,7 +48,7 @@ const ViewHeader = props => {
                                 type="submit"
                             >
                                 <Link
-                                    to="/login"
+                                    to="/"
                                     className="authentication__login--link"
                                 >
                                     {' '}

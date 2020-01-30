@@ -56,9 +56,11 @@ class EditProfileView extends Component {
     };
 
     mouseClick = () => {
+        const{history}=this.props;
         window.cloudinary.openUploadWidget(
             {
                 cloudName: 'dr8lvoqjj',
+                api_key: '456553935284737',
                 uploadPreset: 'gt2kahpt',
                 cropping: true,
                 folder: 'widgetdocs',
@@ -77,7 +79,7 @@ class EditProfileView extends Component {
                     let newImage = result.info.secure_url;
                     window.localStorage.setItem('newImage', newImage);
                     window.localStorage.setItem('image', newImage);
-                    window.location.reload();
+                    history.push('/create-profile');
                 }
             },
         );
