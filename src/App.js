@@ -30,7 +30,7 @@ function App() {
                         />
                         <Route
                             exact
-                            path="/create-profile"
+                            path="/create-profile/:id"
                             component={EditProfileView}
                         />
                     </Switch>
