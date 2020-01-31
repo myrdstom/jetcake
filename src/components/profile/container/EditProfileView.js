@@ -53,6 +53,7 @@ class EditProfileView extends Component {
     };
 
     mouseClick = () => {
+
         const { history } = this.props;
         window.cloudinary.openUploadWidget(
             {
