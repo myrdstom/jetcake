@@ -1,5 +1,6 @@
 import React from 'react';
 import avatar from '../../../assets/images/avatar.png';
+import {Link} from "react-router-dom";
 
 function EditProfile(props) {
     const {
@@ -78,7 +79,6 @@ function EditProfile(props) {
                                     value={firstName}
                                     onChange={onChange}
                                     id="firstName"
-                                    required
                                 />
                                 <br />
                                 <label htmlFor="lastName">Last Name</label>
@@ -89,7 +89,6 @@ function EditProfile(props) {
                                     value={lastName}
                                     onChange={onChange}
                                     id="lastName"
-                                    required
                                 />
                                 <br />
                                 <label htmlFor="phone">Phone</label>
@@ -100,7 +99,6 @@ function EditProfile(props) {
                                     value={phone}
                                     onChange={onChange}
                                     id="lastName"
-                                    required
                                 />
                                 <br />
                                 <label htmlFor="address">Address</label>
@@ -111,7 +109,6 @@ function EditProfile(props) {
                                     value={address}
                                     onChange={onChange}
                                     id="lastName"
-                                    required
                                 />
                                 <br />
                                 <label htmlFor="dateOfBirth">
@@ -124,7 +121,6 @@ function EditProfile(props) {
                                     value={dateOfBirth}
                                     onChange={onChange}
                                     id="lastName"
-                                    required
                                 />
                             </div>
                             <input

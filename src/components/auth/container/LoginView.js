@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import Login from '../component/Login';
+import {notifyUser} from "../../../redux/actions/notifyActions";
+
 
 class LoginView extends Component {
     constructor() {
         super();
         this.state = {
             email: '',
-            password: ''
+            password: '',
         };
     }
 
@@ -17,7 +21,7 @@ class LoginView extends Component {
     };
     handleSubmit = e => {
         e.preventDefault();
-        const { firebase } = this.props;
+        const { firebase, notifyUser } = this.props;
 
         const { email, password } = this.state;
         firebase
@@ -25,14 +29,17 @@ class LoginView extends Component {
                 email,
                 password,
             })
-            .catch(err => alert('Invalid Login Credentials'));
+            .catch(err => notifyUser('Invalid Login Credentials', 'error'));
     };
     render() {
         const { email, password } = this.state;
+        const {message, messageType} = this.props.notify;
         return (
             <div>
                 <Login
                     email={email}
+                    message={message}
+                    messageType={messageType}
                     password={password}
                     onChange={this.handleChange}
                     onSubmit={this.handleSubmit}
@@ -44,6 +51,14 @@ class LoginView extends Component {
 
 LoginView.propTypes = {
     firebase: PropTypes.object.isRequired,
+    notify: PropTypes.object.isRequired,
+    notifyUser:PropTypes.func.isRequired,
+
 };
 
-export default firebaseConnect()(LoginView);
+export default compose(
+    firebaseConnect(),
+    connect((state, props) => ({
+        notify: state.notify
+    }), {notifyUser}),
+)(LoginView);

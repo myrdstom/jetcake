@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect, firebaseConnect } from 'react-redux-firebase';
 import Registration from '../component/Registration';
-import Footer from "../../Footer";
+import { notifyUser } from '../../../redux/actions/notifyActions';
 
 class RegistrationView extends Component {
     state = {
@@ -13,18 +13,19 @@ class RegistrationView extends Component {
         email: '',
         phone: '',
         password: '',
-        question1:'',
-        question2:'',
-        question3:'',
-        answer1:'',
-        answer2:'',
-        answer3:'',
+        question1: '',
+        question2: '',
+        question3: '',
+        answer1: '',
+        answer2: '',
+        answer3: '',
+        avatar: '',
     };
     handleChange = e => {
         this.setState({ [e.target.name]: e.target.value });
     };
     mouseClick = () => {
-        const{history}=this.props;
+        const { history } = this.props;
         window.cloudinary.openUploadWidget(
             {
                 cloudName: 'dr8lvoqjj',
@@ -47,16 +48,17 @@ class RegistrationView extends Component {
                     let newImage = result.info.secure_url;
                     window.localStorage.setItem('newImage', newImage);
                     window.localStorage.setItem('image', newImage);
-                    history.push('/create-profile');
                 }
+                this.setState({
+                    avatar: window.localStorage.getItem('newImage'),
+                });
             },
         );
     };
-    handleSubmit = e => {
+    handleRegistration = e => {
         e.preventDefault();
 
-        const { firstName, lastName, email, phone, question1, question2, question3, answer1, answer2, answer3 } = this.state;
-        const registerUser = {
+        const {
             firstName,
             lastName,
             email,
@@ -66,26 +68,52 @@ class RegistrationView extends Component {
             question3,
             answer1,
             answer2,
-            answer3
+            answer3,
+            avatar,
+            password,
+        } = this.state;
+        const registerUser = {
+            avatar: window.localStorage.getItem('newImage'),
+            firstName,
+            lastName,
+            email,
+            phone,
+            question1,
+            question2,
+            question3,
+            answer1,
+            answer2,
+            answer3,
         };
 
-        const { firestore, firebase, history } = this.props;
-        firebase
-            .auth()
-            .createUserWithEmailAndPassword(
-                this.state.email,
-                this.state.password,
-            )
-            .then(u => {})
-            .then(u => {
-                console.log(u);
-            })
-            .catch(error => console.log(error));
-        firestore.add({ collection: 'profiles' }, registerUser).then(() => history.push('/'))
 
+        const { firestore, firebase, notifyUser } = this.props;
+
+        firebase
+            .createUser({ email, password })
+            .then(res => notifyUser('User successfully registered', 'success'))
+            .catch(err => notifyUser('A user with this email already exists', 'error'));
+
+        firestore
+            .add({ collection: 'profiles' }, registerUser)
+            .then(res => notifyUser('User successfully registered', 'success'))
+            .catch(err => notifyUser('The profile is unaccessible', 'error'));
     };
     render() {
-        const { firstName, lastName, email, phone, password, question1, question2, question3, answer1, answer2, answer3 } = this.state;
+        const {
+            firstName,
+            lastName,
+            email,
+            phone,
+            password,
+            question1,
+            question2,
+            question3,
+            answer1,
+            answer2,
+            answer3,
+        } = this.state;
+        const { message, messageType } = this.props.notify;
         return (
             <div>
                 <Registration
@@ -100,8 +128,10 @@ class RegistrationView extends Component {
                     answer1={answer1}
                     answer2={answer2}
                     answer3={answer3}
+                    message={message}
+                    messageType={messageType}
                     onChange={this.handleChange}
-                    onSubmit={this.handleSubmit}
+                    onSubmit={this.handleRegistration}
                     onMouseClick={this.mouseClick}
                 />
             </div>
@@ -112,6 +142,14 @@ class RegistrationView extends Component {
 RegistrationView.propTypes = {
     firestore: PropTypes.object.isRequired,
     firebase: PropTypes.object.isRequired,
+    notify: PropTypes.object.isRequired,
+    notifyUser: PropTypes.func.isRequired,
 };
 
-export default firestoreConnect()(RegistrationView);
+export default compose(
+    firestoreConnect(),
+    firebaseConnect(),
+    connect((state, props) => ({
+        notify: state.notify
+    }), {notifyUser}),
+)(RegistrationView);

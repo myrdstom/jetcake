@@ -10,47 +10,42 @@ class EditProfileView extends Component {
     state = {
         firstName: '',
         lastName: '',
-        avatar:'',
+        avatar: '',
         phone: '',
         address: '',
         dateOfBirth: '',
     };
     componentDidMount() {
-        const { auth, profiles } = this.props;
+        const { auth, profile } = this.props;
 
-        if (auth && profiles) {
-            for (let i = 0; i < profiles.length; i++) {
-                if (auth.email === profiles[i].email) {
-                    this.setState({
-                        firstName: profiles[i].firstName,
-                        lastName: profiles[i].lastName,
-                        avatar:profiles[i].avatar || '',
-                        phone: profiles[i].phone || '',
-                        address: profiles[i].address || '',
-                        dateOfBirth: profiles[i].dateOfBirth || '',
-                    });
-                }
+        if (auth && profile) {
+            if (auth.email === profile.email) {
+                this.setState({
+                    id: profile.firstName,
+                    firstName: profile.firstName,
+                    lastName: profile.lastName,
+                    avatar: profile.avatar || '',
+                    phone: profile.phone || '',
+                    address: profile.address || '',
+                    dateOfBirth: profile.dateOfBirth || '',
+                });
             }
+
         }
     }
 
-
     componentWillReceiveProps(nextProps) {
         const auth = nextProps.auth;
-        const profile = nextProps.profiles;
+        const profile = nextProps.profile;
         if (auth && profile) {
-            for (let i = 0; i < profile.length; i++) {
-                if (auth.email === profile[i].email) {
-                    this.setState({
-                        firstName: profile[i].firstName,
-                        lastName: profile[i].lastName,
-                        avatar:profile[i].avatar || '',
-                        phone: profile[i].phone || '',
-                        address: profile[i].address || '',
-                        dateOfBirth: profile[i].dateOfBirth || '',
-                    });
-                }
-            }
+            this.setState({
+                firstName: profile.firstName,
+                lastName: profile.lastName,
+                avatar: profile.avatar || '',
+                phone: profile.phone || '',
+                address: profile.address || '',
+                dateOfBirth: profile.dateOfBirth || '',
+            });
         }
     }
 
@@ -82,7 +77,7 @@ class EditProfileView extends Component {
                     let newImage = result.info.secure_url;
                     window.localStorage.setItem('newImage', newImage);
                     window.localStorage.setItem('image', newImage);
-                    history.push('/create-profile');
+                    history.push(`/create-profile/${this.props.match.params.id}`);
                 }
             },
         );
@@ -92,21 +87,23 @@ class EditProfileView extends Component {
         e.preventDefault();
 
         const profileData = {
-            avatar:
-                window.localStorage.getItem('newImage'),
+            avatar: window.localStorage.getItem('newImage'),
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             phone: this.state.phone,
             address: this.state.address,
-            dateOfBirth: this.state.dateOfBirth
+            dateOfBirth: this.state.dateOfBirth,
         };
-        const { firestore, history } = this.props;
-
+        const { firestore, history, profile } = this.props;
+        firestore.update({collection:'profiles', doc: profile.id}, profileData).then(history.push('/profile'))
+        localStorage.removeItem('image');
+        localStorage.removeItem('newImage');
     };
 
     render() {
-        const { profiles } = this.props;
-        if (profiles) {
+        const {  profile } = this.props;
+
+        if (profile) {
             const {
                 firstName,
                 lastName,
@@ -147,12 +144,11 @@ EditProfileView.propTypes = {
 };
 
 export default compose(
-    firestoreConnect([{ collection: 'profiles' }]),
-    connect((state, props) => ({
-        profiles: state.firestore.ordered.profiles,
-    })),
-    firebaseConnect(),
+    firestoreConnect(props => [
+        {collection: 'profiles', storeAs: 'profile', doc: props.match.params.id}
+    ]),
     connect((state, props) => ({
         auth: state.firebase.auth,
+        profile: state.firestore.ordered.profile && state.firestore.ordered.profile[0],
     })),
 )(EditProfileView);
