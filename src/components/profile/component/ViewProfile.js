@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import avatar from '../../../assets/images/avatar.png';
 
 function ViewProfile(props) {
-    const { email, firstName, lastName, address, phone, avatar, dateOfBirth } = props.profile;
+    const { email, firstName, lastName, address, phone, avatar, dateOfBirth } = props;
     let fullName;
     // eslint-disable-next-line
     {
@@ -20,10 +20,10 @@ function ViewProfile(props) {
                             <div className="col-md-4">
                                 <div className="avatar-upload">
                                     <div className="avatar-preview">
-                                        {props.profile.avatar ? (
+                                        {avatar ? (
                                             <img
                                                 className="profile__avatar"
-                                                src={props.profile.avatar }
+                                                src={avatar }
                                                 alt=""
                                             />
                                         ) : (
@@ -42,14 +42,14 @@ function ViewProfile(props) {
                                         <strong>{fullName}</strong>{' '}
                                     </span>
                                     <Link to="/create-profile">
-                                        <i className="fa fa-pencil float-right edit_button"></i>
+                                        <i className="fa fa-pencil float-right edit_button"/>
                                     </Link>
                                     <br />
                                     <br />
                                     <ul>
                                         <li>
                                             {}
-                                            <i className="fa fa-envelope-o"></i>
+                                            <i className="fa fa-envelope-o"/>
                                             &nbsp;&nbsp;
                                             <span className="profile__element">
                                                 {email}
