@@ -9,10 +9,11 @@ import Loader from "../../Loader";
 
 class GetProfileView extends Component {
     state = {
+        id:'',
         firstName:'',
         lastName:'',
         email:'',
-        avatar:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTSVWuCurkB8xwYNcygqZlUPJdUvmfCoOiyQZk1L74c6cX-6Boq',
+        avatar:'',
         phone:'',
         address:'',
         dateOfBirth: ''
@@ -25,8 +26,10 @@ class GetProfileView extends Component {
             for(let i=0; i <profiles.length; i++) {
                 if(auth.email === profiles[i].email){
                     this.setState({
+                        id: profiles[i].id,
                         firstName: profiles[i].firstName,
                         lastName:profiles[i].lastName,
+                        avatar: profiles[i].avatar,
                         email: profiles[i].email,
                         phone:profiles[i].phone || '',
                         address:profiles[i].address || '',
@@ -45,12 +48,12 @@ class GetProfileView extends Component {
 
             for(let i=0; i <profile.length; i++) {
                 if(auth.email === profile[i].email){
-                    console.log(auth.email);
-                    console.log(profile[i].email,'the email from profile');
                     this.setState({
+                        id: profile[i].id,
                         firstName: profile[i].firstName,
                         lastName:profile[i].lastName,
-                        email: profile[i].email || '',
+                        avatar: profile[i].avatar,
+                        email: profile[i].email,
                         phone:profile[i].phone || '',
                         address:profile[i].address || '',
                         dateOfBirth: profile[i].dateOfBirth || ''
@@ -65,10 +68,11 @@ class GetProfileView extends Component {
         const{auth}=this.props;
 
         if(profiles) {
-            const {firstName, lastName, email, avatar, phone, address, dateOfBirth} = this.state;
+            const {firstName, lastName, email, avatar, phone, address, dateOfBirth,id} = this.state;
             return (
                 <div>
                     <ViewProfile
+                        id={id}
                         firstName={firstName}
                         lastName={lastName}
                         email={email}

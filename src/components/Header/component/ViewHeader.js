@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ViewHeader = props => {
-    const { isAuthenticated, onLogoutClick } = props;
+    const { isAuthenticated, onLogoutClick, isEmpty, avatar } = props;
     console.log(isAuthenticated,'isAuthenticated');
 
     return (
@@ -14,16 +14,24 @@ const ViewHeader = props => {
                 <div className="navbar--center">
                 </div>
                 <div className="navbar--right">
-                    {isAuthenticated && (
+                    {!isEmpty && (
                         <div>
                             <img src="" alt="" className="rounded-circle" />
                             <span className="profile-button">
                                 <span id="avatar">
                                     <Link to="/profile">
+                                        {avatar ? (
+                                                <img
+                                                    id="avatar-image-icon"
+                                                    src={avatar}
+                                                    alt=""
+                                                />
+                                            ) : (
                                         <i
                                             id="avatar-icon"
                                             className="fas fa-user-circle"
                                         />
+                                            )}
                                     </Link>
                                 </span>
                             </span>
@@ -41,7 +49,7 @@ const ViewHeader = props => {
                             </button>
                         </div>
                     )}
-                    {!isAuthenticated && (
+                    {isEmpty && (
                         <div>
                             <button
                                 className="btn btn-basic my-2 my-sm-0"

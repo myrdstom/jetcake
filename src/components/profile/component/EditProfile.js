@@ -1,5 +1,6 @@
 import React from 'react';
 import avatar from '../../../assets/images/avatar.png';
+import {Link} from "react-router-dom";
 
 function EditProfile(props) {
     const {

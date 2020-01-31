@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import avatar from '../../../assets/images/avatar.png';
 
 function ViewProfile(props) {
-    const { email, firstName, lastName, address, phone, avatar, dateOfBirth } = props;
+    const { email, firstName, lastName, address, phone, avatar, dateOfBirth, id } = props;
     let fullName;
     // eslint-disable-next-line
     {
@@ -11,6 +11,7 @@ function ViewProfile(props) {
             ? (fullName = '')
             : (fullName = firstName + ' ' + lastName);
     }
+    console.log(id);
     return (
         <div>
             <div className="get__profile-container">
@@ -41,7 +42,7 @@ function ViewProfile(props) {
                                     <span>
                                         <strong>{fullName}</strong>{' '}
                                     </span>
-                                    <Link to="/create-profile">
+                                    <Link to={{pathname: `/create-profile/${id}`}}>
                                         <i className="fa fa-pencil float-right edit_button"/>
                                     </Link>
                                     <br />

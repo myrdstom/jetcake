@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import avatar from "../../../assets/images/avatar.png";
+import avatar from '../../../assets/images/avatar.png';
 
 export default function Registration(props) {
     const {
@@ -17,7 +17,8 @@ export default function Registration(props) {
         answer3,
         onSubmit,
         onChange,
-        onMouseClick
+        avatar,
+        onMouseClick,
     } = props;
     return (
         <div className="parent-auth-container container-fluid">
@@ -29,40 +30,42 @@ export default function Registration(props) {
                         <br />
                         <form noValidate onSubmit={onSubmit}>
                             <div className="row">
-                            <div className="avatar-upload">
-                                <div className="avatar-preview">
-                                    {window.localStorage.getItem('image') ? (
-                                        <img
-                                            className="profile__avatar"
-                                            src={window.localStorage.getItem(
-                                                'image'
-                                            )}
+                                <div className="avatar-upload">
+                                    <div className="avatar-preview">
+                                        {window.localStorage.getItem(
+                                            'image',
+                                        ) ? (
+                                            <img
+                                                className="profile__avatar"
+                                                src={window.localStorage.getItem(
+                                                    'image',
+                                                )}
+                                                onClick={onMouseClick}
+                                                alt=""
+                                            />
+                                        ) : props.avatar ? (
+                                            <img
+                                                className="profile__avatar"
+                                                src={props.avatar}
+                                                onClick={onMouseClick}
+                                                alt=""
+                                            />
+                                        ) : (
+                                            <img
+                                                className="profile__avatar"
+                                                src={avatar}
+                                                onClick={onMouseClick}
+                                                alt=""
+                                            />
+                                        )}
+                                    </div>
+                                    <div className="icon">
+                                        <div
+                                            className="camera4"
                                             onClick={onMouseClick}
-                                            alt=""
-                                        />
-                                    ) : props.avatar ? (
-                                        <img
-                                            className="profile__avatar"
-                                            src={props.avatar}
-                                            onClick={onMouseClick}
-                                            alt=""
-                                        />
-                                    ) : (
-                                        <img
-                                            className="profile__avatar"
-                                            src={avatar}
-                                            onClick={onMouseClick}
-                                            alt=""
-                                        />
-                                    )}
+                                        ></div>
+                                    </div>
                                 </div>
-                                <div className="icon">
-                                    <div
-                                        className="camera4"
-                                        onClick={onMouseClick}
-                                    ></div>
-                                </div>
-                            </div>
                             </div>
                             <div className="row">
                                 <div className="col-md-6">
@@ -100,7 +103,7 @@ export default function Registration(props) {
                                     </div>
                                 </div>
                             </div>
-                            <br/>
+                            <br />
                             <div className="form-group">
                                 <label htmlFor="email">Email address</label>
                                 <input
@@ -153,9 +156,7 @@ export default function Registration(props) {
                                 </div>
                                 <div className="col-md-6">
                                     <div className="form-group inline__name">
-                                        <label htmlFor="answer1">
-                                            Answer
-                                        </label>
+                                        <label htmlFor="answer1">Answer</label>
                                         <input
                                             type="text"
                                             className="form-control form-control-sm"
@@ -168,7 +169,7 @@ export default function Registration(props) {
                                     </div>
                                 </div>
                             </div>
-                            <br/>
+                            <br />
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="form-group inline__name">
@@ -188,9 +189,7 @@ export default function Registration(props) {
                                 </div>
                                 <div className="col-md-6">
                                     <div className="form-group inline__name">
-                                        <label htmlFor="answer2">
-                                            Answer
-                                        </label>
+                                        <label htmlFor="answer2">Answer</label>
                                         <input
                                             type="text"
                                             className="form-control form-control-sm"
@@ -203,7 +202,7 @@ export default function Registration(props) {
                                     </div>
                                 </div>
                             </div>
-                            <br/>
+                            <br />
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="form-group inline__name">
@@ -223,9 +222,7 @@ export default function Registration(props) {
                                 </div>
                                 <div className="col-md-6">
                                     <div className="form-group inline__name">
-                                        <label htmlFor="answer3">
-                                            Answer
-                                        </label>
+                                        <label htmlFor="answer3">Answer</label>
                                         <input
                                             type="text"
                                             className="form-control form-control-sm"
