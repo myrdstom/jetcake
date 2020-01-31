@@ -81,7 +81,7 @@ class RegistrationView extends Component {
                 console.log(u);
             })
             .catch(error => console.log(error));
-        firestore.add({ collection: 'profiles' }, registerUser).then(() => history.push('/login'))
+        firestore.add({ collection: 'profiles' }, registerUser).then(() => history.push('/'))
 
     };
     render() {

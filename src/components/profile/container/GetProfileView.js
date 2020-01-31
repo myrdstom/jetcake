@@ -17,19 +17,39 @@ class GetProfileView extends Component {
         address:'',
         dateOfBirth: ''
     }
+    componentDidMount() {
+        const {auth, profiles}=this.props;
+
+        if(auth && profiles){
+
+            for(let i=0; i <profiles.length; i++) {
+                if(auth.email === profiles[i].email){
+                    this.setState({
+                        firstName: profiles[i].firstName,
+                        lastName:profiles[i].lastName,
+                        email: profiles[i].email,
+                        phone:profiles[i].phone || '',
+                        address:profiles[i].address || '',
+                        dateOfBirth: profiles[i].dateOfBirth || ''
+                    })
+                }
+            }
+
+        }
+    }
 
     componentWillReceiveProps(nextProps) {
         const auth =nextProps.auth;
         const profile = nextProps.profiles;
-        if(auth&& profile){
+        if(auth && profile){
 
             for(let i=0; i <profile.length; i++) {
                 if(auth.email === profile[i].email){
                     console.log(auth.email);
                     console.log(profile[i].email,'the email from profile');
                     this.setState({
-                        firstName: profile[i].firstName || '',
-                        lastName:profile[i].lastName || '',
+                        firstName: profile[i].firstName,
+                        lastName:profile[i].lastName,
                         email: profile[i].email || '',
                         phone:profile[i].phone || '',
                         address:profile[i].address || '',

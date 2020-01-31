@@ -3,48 +3,54 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Loader from '../../Loader';
 import { compose } from 'redux';
-import {firebaseConnect, firestoreConnect} from 'react-redux-firebase';
+import { firebaseConnect, firestoreConnect } from 'react-redux-firebase';
 import EditProfile from '../component/EditProfile';
 
 class EditProfileView extends Component {
     state = {
-        firstName:'',
-        lastName:'',
-        avatar:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTSVWuCurkB8xwYNcygqZlUPJdUvmfCoOiyQZk1L74c6cX-6Boq',
-        phone:'',
-        address:'',
-        dateOfBirth: ''
-    }
-    // componentDidMount() {
-    //     if (!this.props.auth.isAuthenticated) {
-    //         this.props.history.push('/');
-    //     }
-    // }
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     if (!this.props.auth.isAuthenticated) {
-    //         this.props.history.push('/');
-    //     }
-    // }
+        firstName: '',
+        lastName: '',
+        avatar:'',
+        phone: '',
+        address: '',
+        dateOfBirth: '',
+    };
+    componentDidMount() {
+        const { auth, profiles } = this.props;
 
-    componentWillReceiveProps(nextProps) {
-        const auth =nextProps.auth;
-        const profile = nextProps.profiles;
-        if(auth&& profile){
-
-            for(let i=0; i <profile.length; i++) {
-                if(auth.email === profile[i].email){
-                    console.log(auth.email);
-                    console.log(profile[i].email,'the email from profile');
+        if (auth && profiles) {
+            for (let i = 0; i < profiles.length; i++) {
+                if (auth.email === profiles[i].email) {
                     this.setState({
-                        firstName: profile[i].firstName || '',
-                        lastName:profile[i].lastName || '',
-                        phone:profile[i].phone || '',
-                        address:profile[i].address || '',
-                        dateOfBirth: profile[i].dateOfBirth || ''
-                    })
+                        firstName: profiles[i].firstName,
+                        lastName: profiles[i].lastName,
+                        avatar:profiles[i].avatar || '',
+                        phone: profiles[i].phone || '',
+                        address: profiles[i].address || '',
+                        dateOfBirth: profiles[i].dateOfBirth || '',
+                    });
                 }
             }
+        }
+    }
 
+
+    componentWillReceiveProps(nextProps) {
+        const auth = nextProps.auth;
+        const profile = nextProps.profiles;
+        if (auth && profile) {
+            for (let i = 0; i < profile.length; i++) {
+                if (auth.email === profile[i].email) {
+                    this.setState({
+                        firstName: profile[i].firstName,
+                        lastName: profile[i].lastName,
+                        avatar:profile[i].avatar || '',
+                        phone: profile[i].phone || '',
+                        address: profile[i].address || '',
+                        dateOfBirth: profile[i].dateOfBirth || '',
+                    });
+                }
+            }
         }
     }
 
@@ -53,7 +59,6 @@ class EditProfileView extends Component {
     };
 
     mouseClick = () => {
-
         const { history } = this.props;
         window.cloudinary.openUploadWidget(
             {
@@ -88,20 +93,28 @@ class EditProfileView extends Component {
 
         const profileData = {
             avatar:
-                window.localStorage.getItem('newImage') || this.state.avatar,
+                window.localStorage.getItem('newImage'),
             firstName: this.state.firstName,
             lastName: this.state.lastName,
-            bio: this.state.bio,
+            phone: this.state.phone,
+            address: this.state.address,
+            dateOfBirth: this.state.dateOfBirth
         };
-        const { createProfile, history } = this.props;
+        const { firestore, history } = this.props;
 
-        createProfile(profileData, history);
     };
 
     render() {
         const { profiles } = this.props;
         if (profiles) {
-            const {firstName, lastName,  avatar, phone, address, dateOfBirth} = this.state;
+            const {
+                firstName,
+                lastName,
+                avatar,
+                phone,
+                address,
+                dateOfBirth,
+            } = this.state;
 
             return (
                 <div>
@@ -141,5 +154,5 @@ export default compose(
     firebaseConnect(),
     connect((state, props) => ({
         auth: state.firebase.auth,
-    }))
+    })),
 )(EditProfileView);
