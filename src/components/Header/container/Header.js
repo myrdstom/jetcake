@@ -22,12 +22,19 @@ export class Header extends Component {
         if(auth){
             this.setState({isAuthenticated: true})
 
+        } else{
+            this.setState({isAuthenticated: false})
         }
     }
 
-    onLogoutClick = e => {};
+    onLogoutClick = e => {
+        e.preventDefault();
+        const {firebase}=this.props;
+        firebase.logout();
+    };
     render() {
         const {isAuthenticated} = this.state;
+        const {auth}= this.props;
         return (
             <div>
                 <ViewHeader
@@ -41,6 +48,7 @@ export class Header extends Component {
 
 Header.propTypes = {
     firebase: PropTypes.object.isRequired,
+    auth: PropTypes.object
 };
 
 export default compose(
