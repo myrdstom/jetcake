@@ -8,8 +8,8 @@ import ViewHeader from '../component/ViewHeader';
 
 export class Header extends Component {
     state = {
-        isAuthenticated: false,
         avatar: '',
+        isAuthenticated: false
     };
 
     componentDidMount() {
@@ -27,10 +27,10 @@ export class Header extends Component {
 
     componentWillReceiveProps(nextProps) {
         const { auth } = this.props;
-        if (auth) {
+        if (auth.uid) {
             this.setState({ isAuthenticated: true });
         } else {
-            this.setState({ isAuthenticated: false });
+
         }
         const nextAuth =nextProps.auth;
         const profile = nextProps.profiles;
@@ -39,7 +39,7 @@ export class Header extends Component {
             for(let i=0; i <profile.length; i++) {
                 if(nextAuth.email === profile[i].email){
                     this.setState({
-                        avatar: profile[i].avatar||'',
+                        avatar: profile[i].avatar,
                     })
                 }
             }
@@ -48,19 +48,20 @@ export class Header extends Component {
     }
 
     onLogoutClick = e => {
-        e.preventDefault();
         const { firebase } = this.props;
-        firebase.logout();
+        localStorage.removeItem('image');
+        localStorage.removeItem('newImage');
+        firebase.logout()
+
     };
     render() {
-        const { isAuthenticated, avatar } = this.state;
+        const { avatar } = this.state;
         const { auth } = this.props;
         return (
             <div>
                 <ViewHeader
                     isEmpty={auth.isEmpty}
                     avatar={avatar}
-                    isAuthenticated={isAuthenticated}
                     onLogoutClick={this.onLogoutClick}
                 />
             </div>

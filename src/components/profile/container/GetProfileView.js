@@ -19,6 +19,7 @@ class GetProfileView extends Component {
         dateOfBirth: ''
     }
     componentDidMount() {
+        console.log('the mounted component');
         const {auth, profiles}=this.props;
 
         if(auth && profiles){
@@ -42,6 +43,7 @@ class GetProfileView extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log('the received props component');
         const auth =nextProps.auth;
         const profile = nextProps.profiles;
         if(auth && profile){
@@ -65,7 +67,6 @@ class GetProfileView extends Component {
     }
     render() {
         const {profiles} = this.props;
-        const{auth}=this.props;
 
         if(profiles) {
             const {firstName, lastName, email, avatar, phone, address, dateOfBirth,id} = this.state;
@@ -94,7 +95,7 @@ class GetProfileView extends Component {
 
 GetProfileView.propTypes = {
     firestore: PropTypes.object.isRequired,
-    users: PropTypes.array
+    profiles: PropTypes.array
 };
 
 export default compose(

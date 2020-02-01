@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Loader from '../../Loader';
 import { compose } from 'redux';
-import { firebaseConnect, firestoreConnect } from 'react-redux-firebase';
+import {  firestoreConnect } from 'react-redux-firebase';
 import EditProfile from '../component/EditProfile';
 
 class EditProfileView extends Component {
@@ -94,15 +94,12 @@ class EditProfileView extends Component {
             address: this.state.address,
             dateOfBirth: this.state.dateOfBirth,
         };
-        console.log(profileData)
         const { firestore, history, profile } = this.props;
         firestore.update({collection:'profiles', doc: profile.id}, profileData).then(history.push('/profile'))
     };
 
     render() {
         const {  profile } = this.props;
-        console.log(profile, 'the client');
-        console.log(this.props);
 
         if (profile) {
             const {
@@ -141,7 +138,8 @@ class EditProfileView extends Component {
 
 EditProfileView.propTypes = {
     firestore: PropTypes.object.isRequired,
-    users: PropTypes.array,
+    profile: PropTypes.array,
+    auth: PropTypes.object,
 };
 
 export default compose(
