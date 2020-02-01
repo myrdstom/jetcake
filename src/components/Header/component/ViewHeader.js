@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 const ViewHeader = props => {
     const { isAuthenticated, onLogoutClick, isEmpty, avatar } = props;
-    console.log(isAuthenticated,'isAuthenticated');
 
     return (
         <nav className="shadow navbar navbar-expand-lg navbar-light bg-light mb-4">

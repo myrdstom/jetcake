@@ -34,7 +34,7 @@ function App() {
                             component={EditProfileView}
                         />
                     </Switch>
-                    <Footer />
+                    {/*<Footer />*/}
                 </div>
             </Router>
         </Provider>

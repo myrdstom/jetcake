@@ -29,8 +29,6 @@ export class Header extends Component {
         const { auth } = this.props;
         if (auth) {
             this.setState({ isAuthenticated: true });
-        } else {
-            this.setState({ isAuthenticated: false });
         }
         const nextAuth =nextProps.auth;
         const profile = nextProps.profiles;
@@ -39,7 +37,7 @@ export class Header extends Component {
             for(let i=0; i <profile.length; i++) {
                 if(nextAuth.email === profile[i].email){
                     this.setState({
-                        avatar: profile[i].avatar||'',
+                        avatar: profile[i].avatar,
                     })
                 }
             }
@@ -48,9 +46,11 @@ export class Header extends Component {
     }
 
     onLogoutClick = e => {
-        e.preventDefault();
         const { firebase } = this.props;
-        firebase.logout();
+        localStorage.removeItem('image');
+        localStorage.removeItem('newImage');
+        firebase.logout()
+
     };
     render() {
         const { isAuthenticated, avatar } = this.state;

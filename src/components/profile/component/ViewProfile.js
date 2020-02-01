@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import avatar from '../../../assets/images/avatar.png';
 
 function ViewProfile(props) {
-    const { email, firstName, lastName, address, phone, avatar, dateOfBirth, id } = props;
+    const { email, firstName, lastName, address, phone, dateOfBirth, id } = props;
     let fullName;
     // eslint-disable-next-line
     {
@@ -11,7 +11,6 @@ function ViewProfile(props) {
             ? (fullName = '')
             : (fullName = firstName + ' ' + lastName);
     }
-    console.log(id);
     return (
         <div>
             <div className="get__profile-container">
@@ -21,10 +20,10 @@ function ViewProfile(props) {
                             <div className="col-md-4">
                                 <div className="avatar-upload">
                                     <div className="avatar-preview">
-                                        {avatar ? (
+                                        {props.avatar ? (
                                             <img
                                                 className="profile__avatar"
-                                                src={avatar }
+                                                src={props.avatar }
                                                 alt=""
                                             />
                                         ) : (

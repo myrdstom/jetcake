@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import avatar from '../../../assets/images/avatar.png';
+import Alert from "../../layouts/Alert";
 
 export default function Registration(props) {
+
     const {
         firstName,
         lastName,
@@ -17,7 +19,8 @@ export default function Registration(props) {
         answer3,
         onSubmit,
         onChange,
-        avatar,
+        messageType,
+        message,
         onMouseClick,
     } = props;
     return (
@@ -25,6 +28,9 @@ export default function Registration(props) {
             <div className="auth__grid">
                 <div className="registration__aside">
                     <div className="registration__container">
+                        {message ? (
+                            <Alert message={message} messageType={messageType}/>
+                        ) : null}
                         <h1>Get Started, its easy</h1>
                         <div className="auth__action">Sign Up</div>
                         <br />
@@ -42,13 +48,7 @@ export default function Registration(props) {
                                                 )}
                                                 onClick={onMouseClick}
                                                 alt=""
-                                            />
-                                        ) : props.avatar ? (
-                                            <img
-                                                className="profile__avatar"
-                                                src={props.avatar}
-                                                onClick={onMouseClick}
-                                                alt=""
+                                                aria-required="true"
                                             />
                                         ) : (
                                             <img
@@ -56,6 +56,7 @@ export default function Registration(props) {
                                                 src={avatar}
                                                 onClick={onMouseClick}
                                                 alt=""
+                                                aria-required="true"
                                             />
                                         )}
                                     </div>
@@ -113,6 +114,7 @@ export default function Registration(props) {
                                     name="email"
                                     value={email}
                                     onChange={onChange}
+                                    required
                                 />
                             </div>
                             <div className="form-group">
@@ -124,6 +126,7 @@ export default function Registration(props) {
                                     name="phone"
                                     value={phone}
                                     onChange={onChange}
+                                    required
                                 />
                             </div>
                             <div className="form-group">
@@ -135,6 +138,7 @@ export default function Registration(props) {
                                     name="password"
                                     value={password}
                                     onChange={onChange}
+                                    required
                                 />
                             </div>
                             <div className="row">
