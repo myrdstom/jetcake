@@ -1,131 +1,219 @@
 /* Reset */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .navbar-brand .header {
-  color: #212529;
+    color: #212529;
 }
 
 .nav-item {
-  margin-right: 30px;
+    margin-right: 30px;
 }
 
 .small-font {
-  font-size: $small-font-size;
+    font-size: $small-font-size;
 }
 .btn {
-  margin-right: 20px;
+    margin-right: 20px;
 }
 
-
 .collapse .navbar-collapse .navbar-nav .mr-auto {
-  max-width: 10px;
+    max-width: 10px;
 }
 
 /* search button*/
 
 .active-cyan-2 input[type='text']:focus:not([readonly]) {
-  border-bottom: 1px solid #4dd0e1;
-  box-shadow: 0 1px 0 0 #4dd0e1;
+    border-bottom: 1px solid #4dd0e1;
+    box-shadow: 0 1px 0 0 #4dd0e1;
 }
 .form-control .mr-sm-2 .small-font {
-  font-size: 12px;
-  color: yellow;
+    font-size: 12px;
+    color: yellow;
 }
 
 .navbar--right {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 }
 
 /*Login and register links*/
 
 .authentication__login--link {
-  color: black;
-  text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 
 .authentication__login--link:hover {
-  color: $blue;;
-  text-decoration: none;
+    color: $blue;
+    text-decoration: none;
 }
 
 .authentication__register--link:hover {
-  text-decoration: none;
-  color: white;
+    text-decoration: none;
+    color: white;
 }
 .btn-outline-primary {
-  font-family: Poppins, Helvetica, sans-serif;
-  font-size: $small-font-size;
-  color: $blue;
-  letter-spacing: 1px;
-  line-height: 15px;
-  border: 2px solid $blue;
-  border-radius: 40px;
-  background: transparent;
-  transition: all 0.3s ease 0s;
+    font-family: Poppins, Helvetica, sans-serif;
+    font-size: $small-font-size;
+    color: $blue;
+    letter-spacing: 1px;
+    line-height: 15px;
+    border: 2px solid $blue;
+    border-radius: 40px;
+    background: transparent;
+    transition: all 0.3s ease 0s;
 }
 
 .btn-outline-primary:hover {
-  text-decoration: none;
-  color: white;
-  background: $blue;
-  border: 2px solid $blue;
+    text-decoration: none;
+    color: white;
+    background: $blue;
+    border: 2px solid $blue;
 }
 
 /* Profile buttons */
 
-
-.profile-button{
-  margin-right: 30px;
+.profile-button {
+    margin-right: 30px;
 }
 
 .dropdown-toggle {
-  background: $background;
-  color: $background;
-  border: 1px solid #ececec;
-  padding: 10px 1000px;
-  display: inline-block;
-  cursor: pointer;
-  position: relative;
-  top: 0;
-  margin: 0;
+    background: $background;
+    color: $background;
+    border: 1px solid #ececec;
+    padding: 10px 1000px;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    top: 0;
+    margin: 0;
 }
 
 .dropdown-toggle:hover {
-  background: $background;
-  color: $background;
-  border: 1px solid #ececec;
-  padding: 10px 20px;
-  display: inline-block;
-  cursor: pointer;
-  position: relative;
-  top: 0;
-  margin: 0;
+    background: $background;
+    color: $background;
+    border: 1px solid #ececec;
+    padding: 10px 20px;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    top: 0;
+    margin: 0;
 }
 
 #avatar-icon {
-  background: $background;
-  color: $light-grey;
-  vertical-align: -25%;
-  font-size: 35px;
+    background: $background;
+    color: $light-grey;
+    vertical-align: -25%;
+    font-size: 35px;
 }
 
 #avatar-icon:hover {
-  background: $background;
-  color: $light-grey;
+    background: $background;
+    color: $light-grey;
 }
 #avatar-image-icon {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
 }
 
 #avatar {
-  color: white;
-  background: white;
+    color: white;
+    background: white;
 }
 
+.newSideBar {
+    display: none;
+}
+
+@media only screen and (max-width: 700px) {
+    .navbar {
+        display: none;
+    }
+
+    //Sidebar
+    .newSideBar {
+        position: absolute;
+        display: inline;
+        margin-top: -24px;
+    }
+
+    .sidebar {
+        z-index:111;
+        position: fixed;
+        left: -250px;
+        width: 250px;
+        height: 100%;
+        background: $background;
+        transition: all 0.5s ease;
+    }
+    .sidebar header {
+        font-size: 22px;
+        color: black;
+        line-height: 70px;
+        text-align: center;
+        background: $background;
+        user-select: none;
+    }
+    .sidebar ul a {
+        display: block;
+        height: 100%;
+        width: 100%;
+        line-height: 65px;
+        font-size: $medium-font-size;
+        color: black;
+        padding-left: 40px;
+        box-sizing: border-box;
+        border-bottom: 1px solid black;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        transition: 0.4s;
+    }
+    ul li:hover a {
+        padding-left: 50px;
+    }
+    .sidebar ul a i {
+        margin-right: 16px;
+    }
+    #check {
+        display: none;
+    }
+    label #btn,
+    label #cancel {
+        position: absolute;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    label #btn {
+        left: 30px;
+        top: 25px;
+        font-size: 25px;
+        color: $dark-grey;
+        padding: 6px 12px;
+        transition: all 0.5s;
+    }
+    label #cancel {
+        z-index: 1111;
+        left: -195px;
+        top: 17px;
+        font-size: 25px;
+        color: $dark-grey;
+        padding: 4px 9px;
+        transition: all 0.5s ease;
+    }
+    #check:checked ~ .sidebar {
+        left: 0;
+    }
+    #check:checked ~ label #btn {
+        left: 250px;
+        opacity: 0;
+        pointer-events: none;
+    }
+    #check:checked ~ label #cancel {
+        left: 195px;
+    }
+}

@@ -8,8 +8,8 @@ import ViewHeader from '../component/ViewHeader';
 
 export class Header extends Component {
     state = {
-        isAuthenticated: false,
         avatar: '',
+        isAuthenticated: false
     };
 
     componentDidMount() {
@@ -27,8 +27,10 @@ export class Header extends Component {
 
     componentWillReceiveProps(nextProps) {
         const { auth } = this.props;
-        if (auth) {
+        if (auth.uid) {
             this.setState({ isAuthenticated: true });
+        } else {
+
         }
         const nextAuth =nextProps.auth;
         const profile = nextProps.profiles;
@@ -53,14 +55,13 @@ export class Header extends Component {
 
     };
     render() {
-        const { isAuthenticated, avatar } = this.state;
+        const { avatar } = this.state;
         const { auth } = this.props;
         return (
             <div>
                 <ViewHeader
                     isEmpty={auth.isEmpty}
                     avatar={avatar}
-                    isAuthenticated={isAuthenticated}
                     onLogoutClick={this.onLogoutClick}
                 />
             </div>

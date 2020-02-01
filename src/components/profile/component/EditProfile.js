@@ -1,6 +1,5 @@
 import React from 'react';
 import avatar from '../../../assets/images/avatar.png';
-import {Link} from "react-router-dom";
 
 function EditProfile(props) {
     const {
@@ -69,7 +68,7 @@ function EditProfile(props) {
                     </div>
                     <div className="col-md-1"></div>
                     <div className="col-md-8 float-right">
-                        <form noValidate onSubmit={onSubmit}>
+                        <form onSubmit={onSubmit}>
                             <div className="form-group">
                                 <label htmlFor="firstName">First Name</label>
                                 <input
@@ -79,6 +78,7 @@ function EditProfile(props) {
                                     value={firstName}
                                     onChange={onChange}
                                     id="firstName"
+                                    required
                                 />
                                 <br />
                                 <label htmlFor="lastName">Last Name</label>
@@ -89,6 +89,7 @@ function EditProfile(props) {
                                     value={lastName}
                                     onChange={onChange}
                                     id="lastName"
+                                    required
                                 />
                                 <br />
                                 <label htmlFor="phone">Phone</label>
@@ -98,7 +99,8 @@ function EditProfile(props) {
                                     name="phone"
                                     value={phone}
                                     onChange={onChange}
-                                    id="lastName"
+                                    id="phone"
+                                    required
                                 />
                                 <br />
                                 <label htmlFor="address">Address</label>
@@ -108,19 +110,21 @@ function EditProfile(props) {
                                     name="address"
                                     value={address}
                                     onChange={onChange}
-                                    id="lastName"
+                                    id="address"
+                                    required
                                 />
                                 <br />
                                 <label htmlFor="dateOfBirth">
                                     Date of Birth
                                 </label>
                                 <input
-                                    type="text"
+                                    type="date"
                                     className="form-control profile__input"
                                     name="dateOfBirth"
                                     value={dateOfBirth}
                                     onChange={onChange}
-                                    id="lastName"
+                                    id="dateOfBirth"
+                                    required
                                 />
                             </div>
                             <input

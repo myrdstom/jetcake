@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Loader from '../../Loader';
 import { compose } from 'redux';
-import { firebaseConnect, firestoreConnect } from 'react-redux-firebase';
+import {  firestoreConnect } from 'react-redux-firebase';
 import EditProfile from '../component/EditProfile';
 
 class EditProfileView extends Component {
@@ -85,9 +85,10 @@ class EditProfileView extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
+        const { avatar} = this.props.profile;
 
         const profileData = {
-            avatar: window.localStorage.getItem('newImage'),
+            avatar: window.localStorage.getItem('newImage') || avatar,
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             phone: this.state.phone,

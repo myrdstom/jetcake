@@ -15,9 +15,7 @@
 .auth__grid{
   display: grid;
 }
-.item{
 
-}
 
 
 .registration__container{
@@ -27,11 +25,11 @@
 
 
 .authentication__aside{
-  height: 94vh;
+  height: 85vh;
 }
 
 .registration__aside{
-  height: 115%;
+  height: 100%;
 }
 
 
@@ -59,13 +57,16 @@
   display: inline;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
   .auth__grid{
     display: grid;
     grid-template-columns: 100%;
   }
   .image__container{
     display: none;
+  }
+  .login__wrapper{
+    height: 93vh;
   }
 }
 
