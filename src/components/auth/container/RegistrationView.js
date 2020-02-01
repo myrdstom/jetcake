@@ -30,7 +30,6 @@ class RegistrationView extends Component {
         this.setState({ [e.target.name]: e.target.value });
     };
     mouseClick = () => {
-        const { history } = this.props;
         window.cloudinary.openUploadWidget(
             {
                 cloudName: 'dr8lvoqjj',
@@ -74,7 +73,6 @@ class RegistrationView extends Component {
             answer1,
             answer2,
             answer3,
-            avatar,
             password,
         } = this.state;
         const registerUser = {
@@ -91,19 +89,29 @@ class RegistrationView extends Component {
             answer3,
         };
 
-
-        const { firestore, firebase, notifyUser } = this.props;
+        const { firestore, firebase, notifyUser, history } = this.props;
 
         firebase
             .createUser({ email, password })
             .then(res => notifyUser('User successfully registered', 'success'))
-            .catch(err => notifyUser('A user with this email already exists', 'error'));
-
-        firestore
-            .add({ collection: 'profiles' }, registerUser)
-            .then(res => notifyUser('User successfully registered', 'success'))
-            .catch(err => notifyUser('The profile is unaccessible', 'error'));
+            .then(() => {
+                firestore
+                    .add({ collection: 'profiles' }, registerUser)
+                    .then(res =>
+                        notifyUser('Profile successfully added', 'success'),
+                    )
+                    .then(res => firebase.logout())
+                    .then(res => history.push('/'))
+                    .catch(err => {
+                        console.log(err);
+                        notifyUser('The profile is unaccessible', 'error');
+                    });
+            })
+            .catch(err =>
+                notifyUser('A user with this email already exists', 'error'),
+            );
     };
+
     render() {
         const {
             firstName,
@@ -136,7 +144,7 @@ class RegistrationView extends Component {
                     message={message}
                     messageType={messageType}
                     onChange={this.handleChange}
-                    onSubmit={this.handleRegistration}
+                    onSubmit={this.handleRegistration.bind(this)}
                     onMouseClick={this.mouseClick}
                 />
             </div>
@@ -154,7 +162,10 @@ RegistrationView.propTypes = {
 export default compose(
     firestoreConnect(),
     firebaseConnect(),
-    connect((state, props) => ({
-        notify: state.notify
-    }), {notifyUser}),
+    connect(
+        (state, props) => ({
+            notify: state.notify,
+        }),
+        { notifyUser },
+    ),
 )(RegistrationView);

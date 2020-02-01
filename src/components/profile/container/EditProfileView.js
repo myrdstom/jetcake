@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Loader from '../../Loader';
 import { compose } from 'redux';
-import { firebaseConnect, firestoreConnect } from 'react-redux-firebase';
+import {  firestoreConnect } from 'react-redux-firebase';
 import EditProfile from '../component/EditProfile';
 
 class EditProfileView extends Component {

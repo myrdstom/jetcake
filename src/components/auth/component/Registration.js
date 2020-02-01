@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import avatar from '../../../assets/images/avatar.png';
 import Alert from "../../layouts/Alert";
 
@@ -34,7 +33,7 @@ export default function Registration(props) {
                         <h1>Get Started, its easy</h1>
                         <div className="auth__action">Sign Up</div>
                         <br />
-                        <form noValidate onSubmit={onSubmit}>
+                        <form  onSubmit={onSubmit}>
                             <div className="row">
                                 <div className="avatar-upload">
                                     <div className="avatar-preview">
