@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
+import { toast } from 'react-toastify';
 import Login from '../component/Login';
 import { notifyUser } from '../../../redux/actions/notifyActions';
 
@@ -30,7 +31,8 @@ class LoginView extends Component {
             }).then(() =>{
                 history.push('/profile')
         })
-            .catch(err => notifyUser('Invalid Login Credentials', 'error'));
+
+            .catch(err => toast.error('Invalid Login Credentials!'));
     };
     render() {
         const { email, password } = this.state;

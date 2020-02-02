@@ -15,8 +15,10 @@ This application is built off of create-react-app and uses firebase to persist d
     ```
     git clone https://github.com/myrdstom/jetcake.git
     ```
+ - cd into the `jetcake` directory
 
-- Install all the necessary packages using either of the command below
-    ```
-    yarn  or npm install
-    ```
+- Install all the necessary packages using either of these commands `yarn`  or `npm install`
+  
+- Run the application with either of the commands `yarn start` or `npm start`
+
+- The application will open up to the homepage on your default browser. It will be running on `localhost:3000`

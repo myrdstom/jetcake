@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import LandingPage from "../component/LandingPage";
 
 class LandingPageView extends Component {
@@ -13,6 +12,5 @@ class LandingPageView extends Component {
     }
 }
 
-LandingPageView.propTypes = {};
 
 export default LandingPageView;

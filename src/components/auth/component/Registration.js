@@ -1,7 +1,5 @@
 import React from 'react';
 import avatar from '../../../assets/images/avatar.png';
-import Alert from '../../layouts/Alert';
-
 export default function Registration(props) {
     const {
         firstName,
@@ -18,8 +16,6 @@ export default function Registration(props) {
         answer3,
         onSubmit,
         onChange,
-        messageType,
-        message,
         onMouseClick,
         dateOfBirth
     } = props;
@@ -28,12 +24,6 @@ export default function Registration(props) {
             <div className="auth__grid">
                 <div className="registration__aside">
                     <div className="registration__container">
-                        {message ? (
-                            <Alert
-                                message={message}
-                                messageType={messageType}
-                            />
-                        ) : null}
                         <h1>Get Started, its easy</h1>
                         <div className="auth__action">Sign Up</div>
                         <br />

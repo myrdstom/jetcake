@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './firebase/store';
+import { ToastContainer } from 'react-toastify';
 
 import Header from './components/Header/container/Header';
 import LoginView from './components/auth/container/LoginView';
@@ -17,6 +18,7 @@ function App() {
             <Router>
                 <div className="App">
                     <Header />
+                    <ToastContainer autoClose={3000} />
                     <Switch>
                         <Route exact path="/" component={LandingPageView} />
                         <Route exact path="/login" component={LoginView} />
