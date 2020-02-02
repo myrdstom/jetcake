@@ -9,12 +9,6 @@ export default function Login(props) {
                 <div className="auth__grid">
                     <div className="authentication__aside">
                         <div className="authentication__container">
-                            {message ? (
-                                <Alert
-                                    message={message}
-                                    messageType={messageType}
-                                />
-                            ) : null}
                             <h1>Welcome back</h1>
                             <div className="auth__action">Sign In</div>
                             <br />

@@ -28,12 +28,6 @@ export default function Registration(props) {
             <div className="auth__grid">
                 <div className="registration__aside">
                     <div className="registration__container">
-                        {message ? (
-                            <Alert
-                                message={message}
-                                messageType={messageType}
-                            />
-                        ) : null}
                         <h1>Get Started, its easy</h1>
                         <div className="auth__action">Sign Up</div>
                         <br />

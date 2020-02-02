@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { firestoreConnect, firebaseConnect } from 'react-redux-firebase';
 import Registration from '../component/Registration';
 import { notifyUser } from '../../../redux/actions/notifyActions';
+import { toast } from 'react-toastify';
 
 class RegistrationView extends Component {
     state = {
@@ -13,7 +14,7 @@ class RegistrationView extends Component {
         email: '',
         phone: '',
         password: '',
-        address:'',
+        address: '',
         question1: '',
         question2: '',
         question3: '',
@@ -98,7 +99,7 @@ class RegistrationView extends Component {
         const { firestore, firebase, notifyUser, history } = this.props;
 
         if (!registerUser.avatar) {
-            notifyUser('The user needs a profile picture', 'error');
+            toast.error('The user needs a profile picture');
         } else {
             firebase
                 .createUser({ email, password })
@@ -108,17 +109,11 @@ class RegistrationView extends Component {
                         .then(res => firebase.logout())
                         .then(res => history.push('/login'))
                         .catch(err => {
-                            notifyUser(
-                                'The profile is cannot be created',
-                                'error',
-                            );
+                            toast.error('The profile is cannot be created');
                         });
                 })
                 .catch(err =>
-                    notifyUser(
-                        'A user with this email already exists',
-                        'error',
-                    ),
+                    toast.error('A user with this email already exists'),
                 );
         }
     };
