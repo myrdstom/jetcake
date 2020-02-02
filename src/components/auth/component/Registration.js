@@ -1,9 +1,8 @@
 import React from 'react';
 import avatar from '../../../assets/images/avatar.png';
-import Alert from "../../layouts/Alert";
+import Alert from '../../layouts/Alert';
 
 export default function Registration(props) {
-
     const {
         firstName,
         lastName,
@@ -21,6 +20,7 @@ export default function Registration(props) {
         messageType,
         message,
         onMouseClick,
+        dateOfBirth
     } = props;
     return (
         <div className="parent-auth-container container-fluid">
@@ -28,12 +28,15 @@ export default function Registration(props) {
                 <div className="registration__aside">
                     <div className="registration__container">
                         {message ? (
-                            <Alert message={message} messageType={messageType}/>
+                            <Alert
+                                message={message}
+                                messageType={messageType}
+                            />
                         ) : null}
                         <h1>Get Started, its easy</h1>
                         <div className="auth__action">Sign Up</div>
                         <br />
-                        <form  onSubmit={onSubmit}>
+                        <form onSubmit={onSubmit}>
                             <div className="row">
                                 <div className="avatar-upload">
                                     <div className="avatar-preview">
@@ -63,10 +66,11 @@ export default function Registration(props) {
                                         <div
                                             className="camera4"
                                             onClick={onMouseClick}
-                                        ></div>
+                                        />
                                     </div>
                                 </div>
                             </div>
+                            <br/>
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="form-group inline__name">
@@ -124,6 +128,18 @@ export default function Registration(props) {
                                     placeholder="Phone"
                                     name="phone"
                                     value={phone}
+                                    onChange={onChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="dateOfBirth">Date Of Birth</label>
+                                <input
+                                    type="date"
+                                    className="form-control form-control-sm"
+                                    placeholder="Date of Birth"
+                                    name="dateOfBirth"
+                                    value={dateOfBirth}
                                     onChange={onChange}
                                     required
                                 />

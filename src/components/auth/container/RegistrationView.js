@@ -20,6 +20,7 @@ class RegistrationView extends Component {
         answer2: '',
         answer3: '',
         avatar: '',
+        dateOfBirth: '',
     };
     componentDidMount() {
         localStorage.removeItem('image');
@@ -74,6 +75,7 @@ class RegistrationView extends Component {
             answer2,
             answer3,
             password,
+            dateOfBirth,
         } = this.state;
         const registerUser = {
             avatar: window.localStorage.getItem('newImage'),
@@ -87,29 +89,35 @@ class RegistrationView extends Component {
             answer1,
             answer2,
             answer3,
+            dateOfBirth,
         };
 
         const { firestore, firebase, notifyUser, history } = this.props;
 
-        firebase
-            .createUser({ email, password })
-            .then(res => notifyUser('User successfully registered', 'success'))
-            .then(() => {
-                firestore
-                    .add({ collection: 'profiles' }, registerUser)
-                    .then(res =>
-                        notifyUser('Profile successfully added', 'success'),
-                    )
-                    .then(res => firebase.logout())
-                    .then(res => history.push('/'))
-                    .catch(err => {
-                        console.log(err);
-                        notifyUser('The profile is unaccessible', 'error');
-                    });
-            })
-            .catch(err =>
-                notifyUser('A user with this email already exists', 'error'),
-            );
+        if (!registerUser.avatar) {
+            notifyUser('The user needs a profile picture', 'error');
+        } else {
+            firebase
+                .createUser({ email, password })
+                .then(() => {
+                    firestore
+                        .add({ collection: 'profiles' }, registerUser)
+                        .then(res => firebase.logout())
+                        .then(res => history.push('/'))
+                        .catch(err => {
+                            notifyUser(
+                                'The profile is cannot be created',
+                                'error',
+                            );
+                        });
+                })
+                .catch(err =>
+                    notifyUser(
+                        'A user with this email already exists',
+                        'error',
+                    ),
+                );
+        }
     };
 
     render() {
@@ -125,6 +133,7 @@ class RegistrationView extends Component {
             answer1,
             answer2,
             answer3,
+            dateOfBirth,
         } = this.state;
         const { message, messageType } = this.props.notify;
         return (
@@ -134,6 +143,7 @@ class RegistrationView extends Component {
                     lastName={lastName}
                     email={email}
                     phone={phone}
+                    dateOfBirth={dateOfBirth}
                     password={password}
                     question1={question1}
                     question2={question2}

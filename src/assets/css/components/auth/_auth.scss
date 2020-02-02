@@ -57,13 +57,16 @@
   display: inline;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
   .auth__grid{
     display: grid;
     grid-template-columns: 100%;
   }
   .image__container{
     display: none;
+  }
+  .login__wrapper{
+    height: 93vh;
   }
 }
 

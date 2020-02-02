@@ -155,12 +155,18 @@ ul {
   .create__profile-container{
     height: 120vh;
   }
+  .get__profile-container{
+    height: 95vh;
+  }
 }
 
 @media only screen and (max-width: 400px) {
 
   .create__profile-container{
     height: 130vh;
+  }
+  .get__profile-container{
+    height: 95vh;
   }
 }
 
