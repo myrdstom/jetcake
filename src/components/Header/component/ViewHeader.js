@@ -30,7 +30,7 @@ const ViewHeader = props => {
                     {isEmpty && (
                         <ul>
                             <li>
-                                <Link to="/">Login</Link>
+                                <Link to="/login">Login</Link>
                             </li>
                             <li>
                                 <Link to="/register">Get Started</Link>
@@ -88,7 +88,7 @@ const ViewHeader = props => {
                                     type="submit"
                                 >
                                     <Link
-                                        to="/"
+                                        to="/login"
                                         className="authentication__login--link"
                                     >
                                         {' '}
