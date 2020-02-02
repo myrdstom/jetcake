@@ -2,10 +2,9 @@
 
 .hero__container{
   position: absolute;
-  top:50%;
+  top:40%;
   left:50%;
   transform: translate(-50%, -50%);
-  overflow: hidden;
   text-align: center;
   color: white;
   font-weight: 700;
@@ -27,15 +26,18 @@
 }
 
 .join__us-btn{
-  color: #331133;
+  font-family: Poppins, Helvetica, sans-serif;
+  color: $blue;
   padding: 10px 24px;
   font-size: $large-font-size;
   text-decoration: none;
-  background: #f1f1f1;
-  border-radius: 8px;
-  transition: 0.3s all;
+  background: white;
+  border: 2px solid $blue;
+  border-radius: 40px;
+  transition: all 0.3s ease 0s;
 }
 
 .join__us-btn:hover {
+  text-decoration: none;
   opacity: 0.7;
 }

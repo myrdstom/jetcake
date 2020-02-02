@@ -103,7 +103,7 @@ class RegistrationView extends Component {
                     firestore
                         .add({ collection: 'profiles' }, registerUser)
                         .then(res => firebase.logout())
-                        .then(res => history.push('/'))
+                        .then(res => history.push('/login'))
                         .catch(err => {
                             notifyUser(
                                 'The profile is cannot be created',

@@ -39,12 +39,11 @@ const ViewHeader = props => {
                     )}
                 </div>
             </span>
-            <nav className="shadow navbar navbar-expand-lg navbar-light bg-light mb-4">
+            <nav className="shadow navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
                     <Link to="/" className="navbar-brand">
                         <strong>JetCake</strong>
                     </Link>
-                    <div className="navbar--center"></div>
                     <div className="navbar--right">
                         {!isEmpty && (
                             <div>

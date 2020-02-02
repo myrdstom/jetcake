@@ -4,7 +4,7 @@ export default function Footer() {
     return (
 
         <footer className="footer-copyright bg-dark text-white mt5 p-4 text-center">
-            Copyright &copy; {new Date().getFullYear()}
+            JetCake Copyright &copy; {new Date().getFullYear()}
         </footer>
 
     )

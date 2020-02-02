@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const HeroImage = styled.div`
     background-image: url(${scenic});
     background-size: cover;
-    height: 100vh;
+    height: 87vh;
 `;
 
 
