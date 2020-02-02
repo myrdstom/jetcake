@@ -9,6 +9,7 @@ export default function Registration(props) {
         email,
         password,
         phone,
+        address,
         question1,
         question2,
         question3,
@@ -128,6 +129,18 @@ export default function Registration(props) {
                                     placeholder="Phone"
                                     name="phone"
                                     value={phone}
+                                    onChange={onChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="address">Address</label>
+                                <input
+                                    type="text"
+                                    className="form-control form-control-sm"
+                                    placeholder="Address"
+                                    name="address"
+                                    value={address}
                                     onChange={onChange}
                                     required
                                 />
