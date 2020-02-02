@@ -30,7 +30,7 @@ const ViewHeader = props => {
                     {isEmpty && (
                         <ul>
                             <li>
-                                <Link to="/">Login</Link>
+                                <Link to="/login">Login</Link>
                             </li>
                             <li>
                                 <Link to="/register">Get Started</Link>
@@ -39,12 +39,11 @@ const ViewHeader = props => {
                     )}
                 </div>
             </span>
-            <nav className="shadow navbar navbar-expand-lg navbar-light bg-light mb-4">
+            <nav className="shadow navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
                     <Link to="/" className="navbar-brand">
                         <strong>JetCake</strong>
                     </Link>
-                    <div className="navbar--center"></div>
                     <div className="navbar--right">
                         {!isEmpty && (
                             <div>
@@ -88,7 +87,7 @@ const ViewHeader = props => {
                                     type="submit"
                                 >
                                     <Link
-                                        to="/"
+                                        to="/login"
                                         className="authentication__login--link"
                                     >
                                         {' '}

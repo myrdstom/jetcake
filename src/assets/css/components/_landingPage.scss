@@ -1,0 +1,43 @@
+
+
+.hero__container{
+  position: absolute;
+  top:40%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.hero__container h1{
+  letter-spacing: 0.2em;
+}
+.hero__container h1 span{
+  border: 10px solid white;
+  padding: 6px 14px;
+  display: inline-block;
+}
+.des{
+  margin: 20px;
+  display: block;
+  font-size: 26px;
+  text-shadow: 0 0 10px black;
+}
+
+.join__us-btn{
+  font-family: Poppins, Helvetica, sans-serif;
+  color: $blue;
+  padding: 10px 24px;
+  font-size: $large-font-size;
+  text-decoration: none;
+  background: white;
+  border: 2px solid $blue;
+  border-radius: 40px;
+  transition: all 0.3s ease 0s;
+}
+
+.join__us-btn:hover {
+  text-decoration: none;
+  opacity: 0.7;
+}

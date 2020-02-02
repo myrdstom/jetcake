@@ -9,6 +9,7 @@ import RegistrationView from './components/auth/container/RegistrationView';
 import EditProfileView from './components/profile/container/EditProfileView';
 import GetProfileView from './components/profile/container/GetProfileView';
 import Footer from './components/Footer';
+import LandingPageView from "./components/LandingPage/container/LandingPageView";
 
 function App() {
     return (
@@ -17,7 +18,8 @@ function App() {
                 <div className="App">
                     <Header />
                     <Switch>
-                        <Route exact path="/" component={LoginView} />
+                        <Route exact path="/" component={LandingPageView} />
+                        <Route exact path="/login" component={LoginView} />
                         <Route
                             exact
                             path="/register"
