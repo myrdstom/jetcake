@@ -13,6 +13,7 @@ class RegistrationView extends Component {
         email: '',
         phone: '',
         password: '',
+        address:'',
         question1: '',
         question2: '',
         question3: '',
@@ -68,6 +69,7 @@ class RegistrationView extends Component {
             lastName,
             email,
             phone,
+            address,
             question1,
             question2,
             question3,
@@ -83,6 +85,7 @@ class RegistrationView extends Component {
             lastName,
             email,
             phone,
+            address,
             question1,
             question2,
             question3,
@@ -126,6 +129,7 @@ class RegistrationView extends Component {
             lastName,
             email,
             phone,
+            address,
             password,
             question1,
             question2,
@@ -143,6 +147,7 @@ class RegistrationView extends Component {
                     lastName={lastName}
                     email={email}
                     phone={phone}
+                    address={address}
                     dateOfBirth={dateOfBirth}
                     password={password}
                     question1={question1}
